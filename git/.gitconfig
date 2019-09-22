@@ -1,0 +1,8 @@
+[user]
+	name = Masato Sugiyama
+	email = public@smasato.net
+[color]
+	ui = true
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
