@@ -1,4 +1,7 @@
 # General
+autoload -U compinit
+compinit
+
 export LANG=ja_JP.UTF-8
 setopt AUTO_CD
 setopt AUTO_LIST
@@ -9,6 +12,8 @@ setopt INTERACTIVE_COMMENTS
 setopt print_eight_bit
 setopt auto_pushd
 setopt pushd_ignore_dups
+setopt auto_param_slash
+setopt mark_dirs
 
 # History
 export HISTFILE=${HOME}/.zsh_history
@@ -51,11 +56,18 @@ bindkey '^x^f' anyframe-widget-insert-filename # ファイル名をコマンド�
 if [ -e /usr/local/share/zsh-completions ]; then
 	fpath=(/usr/local/share/zsh-completions $fpath)
 fi
-setopt AUTO_MENU
+setopt complete_in_word
+setopt auto_menu
 setopt auto_param_keys
 setopt list_types
 setopt magic_equal_subst
-setopt menu_complete
+setopt always_last_prompt
+zstyle ':completion::complete:*' use-cache true
+zstyle ':completion:*:default' menu select=1
+autoload colors
+zstyle ':completion:*' list-colors "${LS_COLORS}"
+zstyle ':completion:*' insert-tab false
+
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh" # This loads nvm
@@ -80,8 +92,4 @@ export POWERLINE_COMMAND=powerline
 export POWERLINE_CONFIG_COMMAND=powerline-config
 powerline-daemon -q
 . /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh # Python 2.7
-
-# init
-autoload -U compinit
-compinit -u
 
