@@ -94,7 +94,7 @@ eval "$(pyenv init -)"
 export POWERLINE_COMMAND=powerline
 export POWERLINE_CONFIG_COMMAND=powerline-config
 powerline-daemon -q
-. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh # Python 2.7
+. /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh # Python 2.7
 
 # google-cloud-sdk
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
