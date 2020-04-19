@@ -223,7 +223,7 @@
 
 let g:python3_host_prog = '/usr/local/bin/python3'
 let g:python_host_prog = '/usr/local/bin/python2'
-let g:node_host_prog = '~/.nvm/versions/node/v8.11.1/bin/neovim-node-host'
+let g:node_host_prog = '~/.nvm/versions/node/v10.20.0/bin/neovim-node-host'
 
 " reset augroup
 augroup MyAutoCmd
