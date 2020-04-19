@@ -53,8 +53,11 @@ bindkey '^xf' anyframe-widget-insert-filename # ファイル名をコマンド�
 bindkey '^x^f' anyframe-widget-insert-filename # ファイル名をコマンドラインに挿入する
 
 # Completion
-if [ -e /usr/local/share/zsh-completions ]; then
-	fpath=(/usr/local/share/zsh-completions $fpath)
+if type brew &>/dev/null; then
+FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+autoload -Uz compinit
+compinit
 fi
 setopt complete_in_word
 setopt auto_menu
@@ -85,7 +88,7 @@ eval "$(rbenv init - zsh)"
 # pyenv
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
- eval "$(pyenv init -)"
+eval "$(pyenv init -)"
 
 # Powerline
 export POWERLINE_COMMAND=powerline
@@ -96,3 +99,8 @@ powerline-daemon -q
 # google-cloud-sdk
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+
+# alias
+alias reload="source $HOME/.zshrc && echo '~/.zshrc reloaded!'"
+alias gs='git status'
+alias c='clear'
