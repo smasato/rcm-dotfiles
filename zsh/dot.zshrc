@@ -52,6 +52,16 @@ bindkey '^x^i' anyframe-widget-insert-git-branch # Gitブランチ名をコマ�
 bindkey '^xf' anyframe-widget-insert-filename # ファイル名をコマンドラインに挿入する
 bindkey '^x^f' anyframe-widget-insert-filename # ファイル名をコマンドラインに挿入する
 
+function tailscale-ip-list () {
+  /Applications/Tailscale.app/Contents/MacOS/Tailscale status \
+    | awk 'BEGIN{OFS="\t"}{print $1,$2}' \
+    | anyframe-selector-auto \
+    | awk '{print $1}' \
+    | anyframe-action-insert
+}
+zle -N tailscale-ip-list
+bindkey '^xt' tailscale-ip-list
+
 # Completion
 if type brew &>/dev/null; then
 FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -80,6 +90,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/opt/llvm/bin"
 export PATH="$PATH:/usr/local/opt/curl/bin"
 export PATH="$PATH:/usr/local/opt/openssl/bin"
+export PATH="/usr/local/sbin:$PATH"
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -94,7 +105,7 @@ eval "$(pyenv init -)"
 export POWERLINE_COMMAND=powerline
 export POWERLINE_CONFIG_COMMAND=powerline-config
 powerline-daemon -q
-. /usr/local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh # Python 3.8
+. /usr/local/lib/python3.9/site-packages/powerline/bindings/zsh/powerline.zsh # Python 3.8
 
 # google-cloud-sdk
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
