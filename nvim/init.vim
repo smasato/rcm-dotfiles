@@ -1,14 +1,21 @@
 " Setup dein  ---------------------------------------------------------------{{{
-  if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
-    call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
-    call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim"))
-  endif
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
-  set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
-  call dein#begin(expand('~/.config/nvim'))
-  call dein#add('Shougo/dein.vim')
+" Required:
+set runtimepath+=/Users/smasato/.cache/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
   call dein#add('haya14busa/dein-command.vim')
-" syntax
+  
+  " syntax
   call dein#add('othree/html5.vim')
   call dein#add('othree/yajs.vim')
   call dein#add('othree/jsdoc-syntax.vim')
@@ -48,7 +55,7 @@
   call dein#add('sbdchd/neoformat')
   call dein#add('scrooloose/syntastic')
   call dein#add('cespare/vim-toml', {'on_ft': 'toml'})
-" deoplete stuff
+  " deoplete stuff
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/deol.nvim')
 
@@ -100,15 +107,20 @@
   call dein#add('padawan-php/deoplete-padawan')
   call dein#add('kana/vim-submode')
 
-  if dein#check_install()
-    call dein#install()
-    let pluginsExist=1
-  endif
-
+  " Required:
   call dein#end()
-  filetype plugin indent on
-" }}}
+  call dein#save_state()
+endif
 
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+" }}}
 " System Settings  ----------------------------------------------------------{{{
   set modifiable
   set write
@@ -221,8 +233,8 @@
   call denite#custom#var('grep', 'final_opts', [])
 "}}}
 
-let g:python3_host_prog = '/usr/local/bin/python3'
-let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '~/.pyenv/versions/3.9.1/bin/python3'
+let g:python_host_prog = '~/.pyenv/versions/2.7.18/bin/python'
 let g:node_host_prog = '~/.nvm/versions/node/v10.20.0/bin/neovim-node-host'
 
 " reset augroup
@@ -238,3 +250,4 @@ autocmd FileType fish compiler fish|setlocal textwidth=79|setlocal foldmethod=ex
 " ==========================================
 autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
+let g:signify_sign_delete_first_line = '-'
