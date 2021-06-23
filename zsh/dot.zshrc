@@ -1,3 +1,7 @@
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # General
 autoload -U compinit
 compinit
@@ -81,6 +85,9 @@ autoload colors
 zstyle ':completion:*' list-colors "${LS_COLORS}"
 zstyle ':completion:*' insert-tab false
 
+test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
+alias ls='ls -G'
+
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh" # This loads nvm
@@ -90,22 +97,21 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/opt/llvm/bin"
 export PATH="$PATH:/usr/local/opt/curl/bin"
 export PATH="$PATH:/usr/local/opt/openssl/bin"
-export PATH="/usr/local/sbin:$PATH"
+export PATH="$PATH:/usr/local/sbin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
 
 # pyenv
-export PYENV_ROOT=$HOME/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
-eval "$(pyenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+fi
 
-# Powerline
-export POWERLINE_COMMAND=powerline
-export POWERLINE_CONFIG_COMMAND=powerline-config
-powerline-daemon -q
-. /usr/local/lib/python3.9/site-packages/powerline/bindings/zsh/powerline.zsh # Python 3.8
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # google-cloud-sdk
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
@@ -115,3 +121,8 @@ source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.
 alias reload="source $HOME/.zshrc && echo '~/.zshrc reloaded!'"
 alias gs='git status'
 alias c='clear'
+alias el='exa'
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
