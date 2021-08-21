@@ -124,5 +124,8 @@ alias c='clear'
 alias el='exa'
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-you-should-use/you-should-use.plugin.zsh
+eval "$(jump shell)"
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
