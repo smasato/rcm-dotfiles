@@ -4,7 +4,7 @@
 [color]
 	ui = true
 [core]
-	editor = nvim
+	editor = vim
 	pager = delta
 	excludesfile = ~/.gitignore_global
 	whitespace = cr-at-eol
