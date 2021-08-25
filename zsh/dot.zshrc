@@ -56,23 +56,26 @@ bindkey '^x^i' anyframe-widget-insert-git-branch # Gitブランチ名をコマ�
 bindkey '^xf' anyframe-widget-insert-filename # ファイル名をコマンドラインに挿入する
 bindkey '^x^f' anyframe-widget-insert-filename # ファイル名をコマンドラインに挿入する
 
-function tailscale-ip-list () {
-  /Applications/Tailscale.app/Contents/MacOS/Tailscale status \
-    | awk 'BEGIN{OFS="\t"}{print $1,$2}' \
-    | anyframe-selector-auto \
-    | awk '{print $1}' \
-    | anyframe-action-insert
-}
-zle -N tailscale-ip-list
-bindkey '^xt' tailscale-ip-list
+if [ -d /Applications/Tailscale.app ]; then
+  function tailscale-ip-list () {
+    /Applications/Tailscale.app/Contents/MacOS/Tailscale status \
+      | awk 'BEGIN{OFS="\t"}{print $1,$2}' \
+      | anyframe-selector-auto \
+      | awk '{print $1}' \
+      | anyframe-action-insert
+  }
+  zle -N tailscale-ip-list
+  bindkey '^xt' tailscale-ip-list
+fi
 
 # Completion
 if type brew &>/dev/null; then
-FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 
-autoload -Uz compinit
-compinit
+  autoload -Uz compinit
+  compinit
 fi
+
 setopt complete_in_word
 setopt auto_menu
 setopt auto_param_keys
@@ -94,11 +97,23 @@ export NVM_DIR="$HOME/.nvm"
 
 # Path
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:/usr/local/opt/llvm/bin"
-export PATH="$PATH:/usr/local/opt/curl/bin"
-export PATH="$PATH:/usr/local/opt/openssl/bin"
 export PATH="$PATH:/usr/local/sbin"
-export PATH="$PATH:$HOME/.cargo/bin"
+
+if [ -d /usr/local/opt/llvm/ ]; then
+  export PATH="$PATH:/usr/local/opt/llvm/bin"
+fi
+
+if [ -d /usr/local/opt/curl ]; then
+  export PATH="$PATH:/usr/local/opt/curl/bin"
+fi
+
+if [ -d /usr/local/opt/openssl ]; then
+  export PATH="$PATH:/usr/local/opt/openssl/bin"
+fi
+
+if [ -d $HOME/.cargo ]; then
+  export PATH="$PATH:$HOME/.cargo/bin"
+fi
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -114,8 +129,10 @@ fi
 source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # google-cloud-sdk
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+if [ -d /usr/local/Caskroom/google-cloud-sdk ]; then
+  source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+  source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+fi
 
 # alias
 alias reload="source $HOME/.zshrc && echo '~/.zshrc reloaded!'"
@@ -123,9 +140,20 @@ alias gs='git status'
 alias c='clear'
 alias el='exa'
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-you-should-use/you-should-use.plugin.zsh
-eval "$(jump shell)"
+if [ -d /usr/local/share/zsh-syntax-highlighting ]; then
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if [ -d /usr/local/share/zsh-autosuggestions ]; then
+  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+if [ -d /usr/local/share/zsh-you-should-use ]; then
+  source /usr/local/share/zsh-you-should-use/you-should-use.plugin.zsh
+fi
+
+if [ -e /usr/local/bin/jump ]; then
+  eval "$(jump shell)"
+fi
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
