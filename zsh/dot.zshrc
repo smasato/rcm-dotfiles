@@ -22,7 +22,7 @@ setopt mark_dirs
 # History
 export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=100000
-export SAVEHIST=500000
+export SAVEHIST=530000
 setopt extended_history
 setopt share_history
 setopt hist_ignore_dups
