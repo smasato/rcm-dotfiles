@@ -115,6 +115,10 @@ if [ -d $HOME/.cargo ]; then
   export PATH="$PATH:$HOME/.cargo/bin"
 fi
 
+if [ -d /usr/local/opt/coreutils/ ]; then
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+fi
+
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
