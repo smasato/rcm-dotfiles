@@ -1,13 +1,16 @@
 [user]
 	name = Masato Sugiyama
 	email = public@smasato.net
+
 [color]
 	ui = true
+
 [core]
 	editor = vim
-	pager = delta
+	pager = delta # git-delta required
 	excludesfile = ~/.gitignore_global
 	whitespace = cr-at-eol
+
 [interactive]
     diffFilter = delta --color-only
 
@@ -28,5 +31,6 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+
 [init]
 	defaultBranch = main
