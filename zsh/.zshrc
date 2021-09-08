@@ -89,7 +89,7 @@ zstyle ':completion:*' list-colors "${LS_COLORS}"
 zstyle ':completion:*' insert-tab false
 
 test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
-alias ls='ls -G'
+alias ls='ls --color=auto' # gnu ls
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
