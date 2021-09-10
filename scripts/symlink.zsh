@@ -1,7 +1,8 @@
 #!/usr/local/bin/zsh
 
 zparseopts -E -D -- \
-    -skhd=o_skhd
+    -skhd=o_skhd \
+    -yabai=o_yabai
 
 # coreutils required
 if [ ! -d /usr/local/opt/coreutils ]; then
@@ -24,6 +25,10 @@ if [ "$1" = "link" ]; then
         ln -s $(readlink -f ./skhd/.skhdrc) ~/.skhdrc && echo "linked $HOME/.skhdrc"
     fi
 
+    if [[ "$o_yabai" ]]; then
+        ln -s $(readlink -f ./yabai/.yabairc) ~/.yabairc && echo "linked $HOME/.yabairc"
+    fi
+
     exit 0
 fi
 
@@ -34,6 +39,10 @@ if [ "$1" = "unlink" ]; then
 
     if [[ "$o_skhd" ]]; then
         unlink ~/.skhdrc && echo "unlinked $HOME/.skhdrc"
+    fi
+
+    if [[ "$o_yabai" ]]; then
+        unlink ~/.yabairc && echo "unlinked $HOME/.yabairc"
     fi
 
     exit 0
