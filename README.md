@@ -4,7 +4,8 @@
 
 - Clone this repository.
 - Install dependent software.
-- run `./scripts/symlink.zsh link`
+    - [rcm](https://github.com/thoughtbot/rcm)
+- run `env RCRC=rcrc rcup`
 
 ## TODO
 
