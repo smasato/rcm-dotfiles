@@ -11,8 +11,8 @@ if [ ! -d /usr/local/opt/coreutils ]; then
     exit 1
 fi
 
-from=("./zsh/.zshrc" "./zsh/.p10k.zsh" "./tmux/.tmux.conf" "./git/.gitconfig" "./git/.gitignore_global" "./alacritty/alacritty.yml")
-to=(".zshrc" '.p10k.zsh' '.tmux.conf' '.gitconfig' '.gitignore_global' '.config/alacritty/alacritty.yml')
+from=("./zsh/.zshrc" "./zsh/.p10k.zsh" "./tmux/.tmux.conf" "./git/.gitconfig" "./git/.gitignore_global" "./alacritty/alacritty.yml" "./asdf/.asdfrc")
+to=(".zshrc" '.p10k.zsh' '.tmux.conf' '.gitconfig' '.gitignore_global' '.config/alacritty/alacritty.yml' '.asdfrc')
 
 if [ "$1" = "link" ]; then
     if [ $#from -eq $#to ]; then

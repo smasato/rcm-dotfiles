@@ -121,10 +121,6 @@ zstyle ':completion:*' insert-tab false
 test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 alias ls='ls --color=auto' # gnu ls
 
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh" # This loads nvm
-
 # Path
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/sbin"
@@ -147,17 +143,6 @@ fi
 
 if [ -d /usr/local/opt/coreutils/ ]; then
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-fi
-
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init --path)"
 fi
 
 source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
@@ -188,6 +173,10 @@ fi
 
 if [ -e /usr/local/bin/jump ]; then
   eval "$(jump shell)"
+fi
+
+if [ -d /usr/local/opt/asdf/ ]; then
+  . $(brew --prefix asdf)/libexec/asdf.sh
 fi
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
