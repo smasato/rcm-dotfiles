@@ -2,6 +2,19 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Zinit
+source ~/.zinit/bin/zinit.zsh
+zinit ice depth"1" # git clone depth
+
+zinit load b4b4r07/enhancd
+export ENHANCD_FILTER=peco
+export ENHANCD_DISABLE_HOME=1
+
+zinit light zdharma/fast-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+zinit load wfxr/forgit
+zinit light MichaelAquilina/zsh-you-should-use
+
 # General
 autoload -U compinit
 compinit
@@ -64,9 +77,7 @@ n ()
 
 # anyframe
 # https://qiita.com/mollifier/items/81b18c012d7841ab33c3
-fpath=($HOME/.zsh/anyframe(N-/) $fpath)
-autoload -Uz anyframe-init
-anyframe-init
+zinit light mollifier/anyframe
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
@@ -158,18 +169,6 @@ alias reload="source $HOME/.zshrc && echo '~/.zshrc reloaded!'"
 alias gs='git status'
 alias c='clear'
 alias el='exa'
-
-if [ -d /usr/local/share/zsh-syntax-highlighting ]; then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-if [ -d /usr/local/share/zsh-autosuggestions ]; then
-  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-
-if [ -d /usr/local/share/zsh-you-should-use ]; then
-  source /usr/local/share/zsh-you-should-use/you-should-use.plugin.zsh
-fi
 
 if [ -e /usr/local/bin/jump ]; then
   eval "$(jump shell)"
