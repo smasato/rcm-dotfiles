@@ -114,7 +114,7 @@ cmd + alt - 4 : yabai -m space --focus 4
 # window
 ctrl + cmd - f : yabai -m window --toggle float
 alt - n : yabai -m window --toggle native-fullscreen
-alt - f : yabai -m window --toggle zoom-fullscreen
+alt - r : yabai -m window --toggle zoom-fullscreen
 alt - t : yabai -m window --toggle topmost
 alt - s : yabai -m window --toggle sticky
 
