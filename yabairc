@@ -51,6 +51,8 @@ yabai -m rule --add label="キーチェーンアクセス" app="^キーチェー
 yabai -m rule --add label="Finder" app="^Finder$" manage=off
 yabai -m rule --add label="システム環境設定" app="^システム環境設定$" manage=off
 yabai -m rule --add label="Alfred" app="^Alfred Preferences$" manage=off
+yabai -m rule --add app="^Cold Turkey Blocker" manage=off
+
 yabai -m rule --add app="Toggl Track" sticky=on grid=3:4:3:4:2:2 manage=on
 
 echo "yabai configuration loaded.."
