@@ -1,2 +1,2 @@
-EXCLUDES="README.md Brewfile nvim"
+EXCLUDES="README.md Brewfile nvim backup setup"
 DOTFILES_DIRS="$HOME/ghq/github.com/smasato/dotfiles"
