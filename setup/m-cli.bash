@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # dock
-m dock autohide YES
-m dock position RIGHT
 m dock prune
 
 # finder
