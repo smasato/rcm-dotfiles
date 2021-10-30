@@ -16,7 +16,7 @@ zinit load wfxr/forgit
 zinit light MichaelAquilina/zsh-you-should-use
 
 # General
-autoload -U compinit
+autoload -Uz compinit
 compinit
 
 export LANG=ja_JP.UTF-8
@@ -176,6 +176,11 @@ fi
 
 if [ -d /usr/local/opt/asdf/ ]; then
   . $(brew --prefix asdf)/libexec/asdf.sh
+fi
+
+if [ -e /usr/local/bin/op ]; then
+  # source <(op completion zsh)
+  eval "$(op completion zsh)"; compdef _op op
 fi
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
