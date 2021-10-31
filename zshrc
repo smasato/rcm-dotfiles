@@ -2,18 +2,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Zinit
-source ~/.zinit/bin/zinit.zsh
-zinit ice depth"1" # git clone depth
+# antigen
+source ~/antigen.zsh
 
-zinit load b4b4r07/enhancd
+antigen bundle b4b4r07/enhancd
 export ENHANCD_FILTER=peco
 export ENHANCD_DISABLE_HOME=1
 
-zinit light zdharma/fast-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit load wfxr/forgit
-zinit light MichaelAquilina/zsh-you-should-use
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle wfxr/forgit
+antigen bundle MichaelAquilina/zsh-you-should-use
 
 # General
 autoload -Uz compinit
@@ -77,7 +76,7 @@ n ()
 
 # anyframe
 # https://qiita.com/mollifier/items/81b18c012d7841ab33c3
-zinit light mollifier/anyframe
+antigen bundle mollifier/anyframe
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
@@ -183,4 +182,5 @@ if [ -e /usr/local/bin/op ]; then
   eval "$(op completion zsh)"; compdef _op op
 fi
 
+antigen apply
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
