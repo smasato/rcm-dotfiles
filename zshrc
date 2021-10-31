@@ -178,7 +178,6 @@ if [ -d /usr/local/opt/asdf/ ]; then
 fi
 
 if [ -e /usr/local/bin/op ]; then
-  # source <(op completion zsh)
   eval "$(op completion zsh)"; compdef _op op
 fi
 
