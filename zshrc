@@ -13,6 +13,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle wfxr/forgit
 antigen bundle MichaelAquilina/zsh-you-should-use
+antigen bundle mollifier/anyframe
+antigen apply
 
 # General
 autoload -Uz compinit
@@ -76,7 +78,6 @@ n ()
 
 # anyframe
 # https://qiita.com/mollifier/items/81b18c012d7841ab33c3
-antigen bundle mollifier/anyframe
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
@@ -181,5 +182,4 @@ if [ -e /usr/local/bin/op ]; then
   eval "$(op completion zsh)"; compdef _op op
 fi
 
-antigen apply
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
